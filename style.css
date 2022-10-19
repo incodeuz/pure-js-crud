@@ -3,7 +3,6 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-
 }
 
 table {
@@ -16,10 +15,42 @@ td {
   font-size: 30px;
   padding: 5px;
 }
+.card {
+  border: 1px solid gray;
+  padding: 15px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.index {
+  font-size: 30px;
+  color: rgb(64, 64, 64);
+  font-family: sans-serif;
+}
+
+#btnDelete{
+  color: white;
+  background-color: rgb(237, 113, 113);
+}
+
+#edit{
+  background-color: #f5d67c;
+}
+
+.name{
+  font-size: 45px;
+  color: rgb(88, 88, 237);
+  font-family: sans-serif;
+}
 
 button {
+  border-radius: 4px;
   font-size: 30px;
   padding: 5px;
+  border: 1px solid gray;
 }
 
 button:hover {

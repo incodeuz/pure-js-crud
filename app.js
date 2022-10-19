@@ -3,9 +3,9 @@ let inputValue = document.getElementById("input");
 const btn = document.getElementById("btn");
 const btnDelete = document.getElementById("btnDelete");
 const list = document.getElementById("list");
-
+const updateBtn = document.getElementById("update");
+var selectedRow = null;
 let inputSearch = document.getElementById("inputSearch");
-const btnSearch = document.getElementById("btnSearch");
 let students = [];
 // Browserga chiqarish
 // method: GET
@@ -13,20 +13,23 @@ function getStudents() {
   var render = "";
   students.map((student, index) => {
     render += `
-        <tr>
-            <td>${index + 1}</td>
-            <td>${student.name}</td>
+        <div style="display:flex; margin: 10px" class="card">
+            <div class="items card-body index">${index + 1}</div>
+            <p class="items card-body name">${student.name}</p>
 
-            <td style="display: flex; justify-content: space-evenly"><button id="btnDelete" onclick={deleteStudent(${
+            <div class="card-body" style="display: flex; justify-content: space-evenly"><button style=" margin-right: 10px;" id="btnDelete" onclick={deleteStudent(${
               student.id
             })}>Delete</button>
-            <button onclick={editStudents(${student.id})}>Edit</button></td>
-        </tr>
+            <button id="edit" onClick="onEdit(this)">Edit</button></div>
+        </div>
     `;
   });
   app.innerHTML = render;
   list.innerHTML =
     students.length > 0 ? students.length : "No students in list";
+  app.childElementCount > 0
+    ? (inputSearch.style.display = "block")
+    : (inputSearch.style.display = "none");
 }
 
 // Add new student
@@ -54,17 +57,31 @@ function deleteStudent(id) {
 
 // Edit student(s)
 // method: PATCH
-function editStudents(ids) {
-  students.map((value) => {
-    if (value.id === ids) {
-      console.log(value.id, ids);
-      inputValue.value += value.name;
-      
-    }
-    // if (addStudent()) {
-    //   value.name = inputValue.value;
-    // }
-  });
+function onEdit(td) {
+  selectedRow = td.parentElement.parentElement;
+  inputValue.value = selectedRow.children[1].innerHTML;
+  console.log(selectedRow.children[1].innerHTML);
+  btn.style.display = "none";
+  update.style.display = "block";
 }
+
+  update.addEventListener("click", () => {
+    selectedRow.children[1].textContent = inputValue.value;
+  });
+
+// Search students
+inputSearch.addEventListener("input", () => {
+  const filter = inputSearch.value.toLowerCase();
+  const listItems = document.querySelectorAll(".items");
+
+  listItems.forEach((item) => {
+    let text = item.textContent;
+    if (text.toLowerCase().includes(filter.toLowerCase())) {
+      item.parentElement.style.display = "";
+    } else {
+      item.parentElement.style.display = "none";
+    }
+  });
+});
 
 getStudents();

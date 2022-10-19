@@ -6,12 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./style.css" />
     <title>Students list</title>
+
   </head>
   <body>
     <div id="content">
       <div class="wrapper">
         <input id="input" type="text" placeholder="Add new student" />
         <button id="btn">Add Student</button>
+        <button style="display: none;" id="update">Update</button>
       </div>
       <div style="display: flex; font-size: 30px">
         Students:
@@ -20,18 +22,17 @@
       <br />
       <div class="wrapper">
         <input id="inputSearch" type="text" placeholder="Search student(s)" />
-        <button id="btnSearch">Search</button>
       </div>
-      <table border="1">
-        <thead>
-          <tr class="not">
-            <th>ID</th>
-            <th>Name</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody id="app"></tbody>
-      </table>
+      <div
+        style="
+          margin: 0 auto;
+          width: 50%;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+        "
+        id="app"
+      ></div>
     </div>
     <script src="./app.js"></script>
   </body>
